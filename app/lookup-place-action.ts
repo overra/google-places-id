@@ -59,3 +59,11 @@ export const lookupPlaceAction = action(
     return { message: "error" };
   }
 );
+
+export async function lookupPlace(placeId: string) {
+  const res = await fetch(
+    `https://places.googleapis.com/v1/places/${placeId}?fields=id,displayName,formattedAddress&key=${process.env.GOOGLE_PLACES_API_KEY}&languageCode=en`
+  );
+  const data = await res.json();
+  return data;
+}
